@@ -1,30 +1,17 @@
-function walk(node, callback) {
-  callback(node);
+var currentParent = document.body;
 
+function nodesToArr() {
+  var currentChildren = [].slice.call(currentParent.children);
+  var result = [currentParent.tagName, currentChildren];
   var i;
-  for (i = 0; i < node.childNodes.length; i += 1) {
-    walk(node.childNodes[i], callback);
-  }
-}
 
-function domTreeTracer(id) {
-  var elem = document.getElementById(id);
-  var result = [];
-  while (elem) {
-    result.push(siblingsOf(elem));
-    elem = elem.parentElement;
+  for (i = 0; i < currentChildren.length; i += 1) {
+    currentParent = currentChildren[i];
+    currentChildren[i] = nodesToArr();
   }
 
   return result;
 }
 
 
-function siblingsOf(elem) {
-  var sibilings = [];
-  while (elem) {
-    sibilings.push(elem);
-    elem = elem.nextElementSibling;
-  }
-
-  return sibilings;
-}
+nodesToArr();
