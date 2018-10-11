@@ -9,3 +9,9 @@
 * Recursion in the DOM: Walking the tree
 
 * Array-like objects: Containers for other objects indexed by non-negative integers. Generally don't support array abstraction methods;
+
+* Template strings are an ES6 construct that allow us to use JavaScript expression inside strings by using a dollar sign followed by curly braces
+
+* Capturing and Bubbling
+
+* The browser waits for the event object to go through the propagation phases (capturing and bubbling) before it performs the default action of the event. If there's an event handler with a preventDefault call somewhere in the propagation path, the default behavior is skipped.
