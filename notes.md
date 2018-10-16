@@ -15,3 +15,9 @@
 * Capturing and Bubbling
 
 * The browser waits for the event object to go through the propagation phases (capturing and bubbling) before it performs the default action of the event. If there's an event handler with a preventDefault call somewhere in the propagation path, the default behavior is skipped.
+
+* Code that must access the DOM should be invoked after the DOMContentLoaded event fires on document.
+
+* Douglas Crockford lecture: An inconvenient API
+
+  * Place script tags as close to the bottom of the body as possible. And place CSS link tags as high in the head as possible.
