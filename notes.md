@@ -21,3 +21,7 @@
 * Douglas Crockford lecture: An inconvenient API
 
   * Place script tags as close to the bottom of the body as possible. And place CSS link tags as high in the head as possible.
+
+* event.stopPropagation vs event.preventDefault
+
+  * event.stopPropagation stops the succeeding event listeners from firing but it doesn't prevent the default behavior of a event on a element which initiates the default behavior.
