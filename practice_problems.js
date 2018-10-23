@@ -1,52 +1,16 @@
-var tracker = (function() {
-  var events = [];
-  return {
-    list: function() {
-      return events.slice();
-    },
-    elements: function() {
-      return this.list().map(function(event) {
-        return event.target;
-      });
-    },
-    clear: function() {
-      events = [];
-      return 0;
-    },
-    add: function(event) {
-      events.push(event);
-    },
-  };
-})();
-function track(callback) {
-  return function(event) {
-    if (!event.tracked) {
-      tracker.add(event);
-      event.tracked = true;
-    }
+$(function() {
+  var $p = $('p');
+  var OUTPUT = 'Your favorite fruit is ';
+  $('a').click(function(event) {
+    event.preventDefault();
+    var $anchor = $(this);
 
-    callback(event);
-  }
-}
+    $p.text(OUTPUT + $anchor.text());
+  });
 
-var divRed = document.querySelector('#red');
-var divBlue = document.querySelector('#blue');
-var divOrange = document.querySelector('#orange');
-var divGreen = document.querySelector('#green');
-
-divRed.addEventListener('click', track(function() {
-  document.body.style.background = 'red';
-}));
-
-divBlue.addEventListener('click', track(function() {
-  event.stopPropagation();
-  document.body.style.background = 'blue';
-}));
-
-divOrange.addEventListener('click', track(function() {
-  document.body.style.background = 'orange';
-}));
-
-divGreen.addEventListener('click', track(function() {
-  document.body.style.background = 'green';
-}));
+  $('form').submit(function(event) {
+    event.preventDefault();
+    var $input = $(this).find('input[type=text]');
+    $p.text(OUTPUT + $input.val());
+  });
+});

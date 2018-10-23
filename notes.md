@@ -25,3 +25,8 @@
 * event.stopPropagation vs event.preventDefault
 
   * event.stopPropagation stops the succeeding event listeners from firing but it doesn't prevent the default behavior of a event on a element which initiates the default behavior.
+
+* jQuery
+
+  * jQuery also accepts camel case property names instead. Whenever you have a CSS property that includes one or more hyphens, you can omit the hyphens and capitalize the next letter instead. For font-size, for example, you can use fontSize instead.
+
