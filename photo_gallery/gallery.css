@@ -66,3 +66,19 @@ li img {
 li.active img {
   border-color: #0066cc;
 }
+
+.arrow {
+  display: inline-block;
+  text-decoration: none;
+  font: normal 20px Helvetica, Arial, sans-serif;
+  color: #f0f0f0;
+  padding: 0 0 20px 0;
+}
+
+.arrow#next {
+  float: right;
+}
+
+.inactive {
+  color: #222;
+}
