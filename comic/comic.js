@@ -1,16 +1,24 @@
 $(function() {
   var $blinds = $('[id^=blind');
-  var speed = 250;
-  var delay = 1500;
-  var totalDelay;
 
-  $blinds.each(function(i) {
-    var $blind = $blinds.eq(i);
-    totalDelay = (delay * i) + speed;
+  function startAnimation(delay, speed) {
+    $blinds.each(function(i) {
+      var $blind = $blinds.eq(i);
+      var totalDelay = (delay * i) + speed;
 
-    $blind.delay(totalDelay).animate({
-      top: '+=height',
-      height: '0',
-    }, speed);
+      $blind.delay(totalDelay).animate({
+        top: '+=height',
+        height: '0',
+      }, speed);
+    });
+  }
+
+  $('a').click(function(e) {
+    e.preventDefault();
+    $blinds.finish();
+    $blinds.removeAttr('style');
+    startAnimation(1500, 250);
   });
+
+  startAnimation(1500, 250);
 });
