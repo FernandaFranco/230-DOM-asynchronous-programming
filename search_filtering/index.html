@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Search Filtering</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="search_filtering.js"></script>
+  </head>
+  <body>
+    <div id="page">
+      <main>
+        <h1>Games</h1>
+        <ul>
+          <li id="1" data-category="Nintendo 3DS">The Legend of Zelda: Majora's Mask 3D for "Nintendo 3DS</li>
+          <li id="2" data-category="Nintendo 3DS">Super Smash Bros. for "Nintendo 3DS</li>
+          <li id="3" data-category="Nintendo WiiU">Super Smash Bros. for "Nintendo WiiU</li>
+          <li id="4" data-category="Nintendo WiiU">LEGO Batman 3: Beyond Gotham for "Nintendo WiiU</li>
+          <li id="5" data-category="Xbox One">LEGO Batman 3: Beyond Gotham for "Xbox One</li>
+          <li id="6" data-category="PlayStation 4">LEGO Batman 3: Beyond Gotham for "PlayStation 4</li>
+          <li id="7" data-category="PlayStation 4">Far Cry 4 for "PlayStation 4</li>
+          <li id="8" data-category="Xbox One">Far Cry 4 for "Xbox One</li>
+          <li id="9" data-category="PlayStation 4">Call of Duty: Advanced Warfare for "PlayStation 4</li>
+          <li id="10" data-category="Xbox One">Call of Duty: Advanced Warfare for "Xbox One</li>
+        </ul>
+      </main>
+      <aside>
+        <form action="" method="get">
+          <fieldset>
+            <ul>
+              <li>
+                <label>
+                  <input checked type="checkbox" value="Nintendo 3DS" />
+                  Nintendo 3DS
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input checked type="checkbox" value="Nintendo WiiU" />
+                  Nintendo WiiU
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input checked type="checkbox" value="Xbox One" />
+                  Xbox One
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input checked type="checkbox" value="PlayStation 4" />
+                  PlayStation 4
+                </label>
+              </li>
+            </ul>
+          </fieldset>
+        </form>
+      </aside>
+    </div>
+  </body>
+</html>
