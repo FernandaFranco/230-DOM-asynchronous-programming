@@ -1,0 +1,111 @@
+body {
+  background-color: #f0f0f0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='83' height='83' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23ca481d' fill-opacity='0.17'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.17'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+body.win {
+  background-color: #0066cc;
+  animation: win 3s;
+}
+
+body.lose {
+  background-color: #b00b00;
+  animation: lose 3s;
+}
+
+@keyframes win {
+  0% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #0066cc;
+  }
+}
+
+@keyframes lose {
+  0% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #b00b00;
+  }
+}
+
+main {
+  width: 800px;
+  padding: 20px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+#tree {
+  position: relative;
+  z-index: 0;
+  width: 678px;
+  height: 517px;
+  margin: 0 auto;
+  background: url('tree.png') 0 0 no-repeat;
+}
+
+#apples {
+  position: absolute;
+  left: 170px;
+  top: 20px;
+  z-index: 1;
+  width: 374px;
+  height: 322px;
+  background: url('apples.png') 0 0 no-repeat;
+}
+
+#apples.guess_1 {
+  background-position: 0 -322px;
+}
+#apples.guess_2 {
+  background-position: 0 -644px;
+}
+#apples.guess_3 {
+  background-position: 0 -966px;
+}
+#apples.guess_4 {
+  background-position: 0 -1288px;
+}
+#apples.guess_5 {
+  background-position: 0 -1610px;
+}
+#apples.guess_6 {
+  display: none;
+}
+
+#spaces,
+#guesses,
+p {
+  padding: 0 0 40px 0;
+}
+
+p {
+  font-size: 20px;
+  padding-bottom: 25px;
+}
+
+p:empty {
+  display: none;
+}
+
+span {
+  display: inline-block;
+  width: 30px;
+  height: 35px;
+  margin: 0 10px 0 0 ;
+  font-size: 28px;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: top;
+  border-bottom: 3px solid #333333;
+}
+
+h2 {
+  display: inline-block;
+  width: 100px;
+  margin: 0;
+  vertical-align: middle;
+}
