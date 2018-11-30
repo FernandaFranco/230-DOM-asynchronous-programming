@@ -30,3 +30,30 @@
 
   * jQuery also accepts camel case property names instead. Whenever you have a CSS property that includes one or more hyphens, you can omit the hyphens and capitalize the next letter instead. For font-size, for example, you can use fontSize instead.
 
+* jQuery event delegation
+
+  * When you have an event handler that is being bound to a large number of elements that all exist within the same container, it's more efficient to delegate the event handling to the parent element rather than bind it to each element individually.
+
+  * You can namespace a event to disable only one event handler:
+
+  ```javascript
+    $('a').on("click", highlight);
+
+    $('a').on("click.alert", function(e) {
+    alert("Now removing only the alert event");
+    $(this).off("click.alert");
+  });
+  ```
+
+  In the example, the `highlight` function is still called the second time a click event occurs on `a`.
+
+  * Any time one of our anchor tags is clicked, a click event is fired for that anchor, and then bubbles up the DOM tree, triggering each of its parent click event handlers:
+
+  ```
+  // Attach a delegated event handler
+    $( "#list" ).on( "click", "a", function( event ) {
+        event.preventDefault();
+        console.log( $( this ).text() );
+    });
+  ```
+
