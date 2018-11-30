@@ -1,7 +1,7 @@
+var $message = $('#message');
 var $letters = $('#spaces');
 var $guesses = $('#guesses');
 var $apples = $('#apples');
-var $message = $('#message');
 var $replay = $("#replay");
 
 var randomWord = function() {
@@ -13,21 +13,8 @@ var randomWord = function() {
   };
 }();
 
-function Game() {
-  this.incorrect = 0;
-  this.lettersGuessed = [];
-  this.correctSpaces = 0;
-  this.word = randomWord();
-  this.allowedGuesses = 6;
-  if (!this.word) {
-    this.displayMessage('Sorry, I\'ve run out of words');
-    this.toggleReplayLink(false);
-    return this;
-  }
-  this.init();
-}
-
-Game.prototype = {
+var Game = {
+  allowedGuesses: 6,
   createBlanks: function() {
     var i;
 
@@ -122,23 +109,34 @@ Game.prototype = {
     $(document).off('.game');
   },
   init: function() {
-    this.bind();
-    this.setClass();
+    this.incorrect = 0;
+    this.word = randomWord();
+    if (!this.word) {
+      this.displayMessage('Sorry, I\'ve run out of words');
+      this.toggleReplayLink(false);
+    } else {
+      this.lettersGuessed = [];
+      this.correctSpaces = 0;
+      this.bind();
+      this.setClass();
+      this.emptyGuesses();
+      this.createBlanks();
+      this.setGameStatus();
+      this.displayMessage('');
+    }
+
     this.toggleReplayLink(false);
-    this.emptyGuesses();
-    this.createBlanks();
-    this.setGameStatus();
-    this.displayMessage('');
+    return this;
   },
 };
+
+var game = Object.create(Game).init();
 
 function notALetter(guess) {
   return guess < 'a' || guess > 'z';
 }
 
-new Game();
-
 $replay.click(function(event) {
   event.preventDefault();
-  new Game();
+  game = Object.create(Game).init();
 });
