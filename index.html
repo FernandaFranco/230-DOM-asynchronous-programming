@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Inventory Order Form</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="inventory_order_form.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Inventory Order Form</h1>
+      <h3>Date Ordered</h3>
+      <p><time datetime="2018-11-30">Fri, 30 Nov 2018 22:34:33 GMT</time></p>
+
+      <form action="" method="post">
+        <fieldset>
+          <dl>
+            <dt>
+              <label for="requester_name">Requester Name</label>
+            </dt>
+            <dd>
+              <input type="text" id="requester_name" name="requester_name" />
+            </dd>
+          </dl>
+          <h2>Shipping Address</h2>
+          <dl>
+            <dt>
+              <label for="address">Street Address</label>
+            </dt>
+            <dd>
+              <input type="text" class="address" name="address" />
+              <input type="text" class="address" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="city">City</label>
+            </dt>
+            <dd>
+              <input type="text" id="city" name="city" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="state">State</label>
+            </dt>
+            <dd>
+              <input type="text" id="state" name="state" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+                <label for="zipcode">Zipcode</label>
+              </dt>
+              <dd>
+                <input type="text" id="zipcode" name="zipcode" />
+              </dd>
+            </dl>
+            <h2>Items to order</h2>
+            <ul></ul>
+            <input type="button" name="add" id="add" value="Add Item" />
+            <input type="submit" name="submit" value="Order Inventory" />
+        </fieldset>
+      </form>
+    </main>
+  </body>
+</html>
