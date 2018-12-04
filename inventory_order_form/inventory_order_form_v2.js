@@ -1,14 +1,23 @@
 var inventory;
 
 (function() {
+  var template = cacheTemplate();
+
+  function cacheTemplate() {
+    return $('#inventory_item').remove().html();
+  }
+
+  function setDate() {
+    var date = new Date();
+    $('#order_date').append('<time datetime="' + date.toISOString() + '">'
+                            + date.toUTCString() + '</time>');
+  }
+
+  setDate();
+
   inventory = {
     id: 0,
     collection: [],
-    setDate: function() {
-      var date = new Date();
-      $('#order_date').append('<time datetime="' + date.toISOString() + '">'
-                              + date.toUTCString() + '</time>');
-    },
     add: function() {
       var item = {
         id: this.id,
@@ -47,7 +56,7 @@ var inventory;
     newItem: function(event) {
       event.preventDefault();
       var item = this.add();
-      var $item = $(this.template.replace(/ID/g, item.id));
+      var $item = $(template.replace(/ID/g, item.id));
       $('#inventory').append($item);
     },
     findParent: function(event) {
@@ -71,25 +80,10 @@ var inventory;
       $('#add_item').on('click', this.newItem.bind(this));
       $('#inventory').on('click', 'a.delete', this.deleteItem.bind(this));
       $('#inventory').on('blur', ':input', this.updateItem.bind(this));
-
-      function getName(target) {
-        var name = target.attr('name');
-        return name.replace(/item|_\d*/g, '');
-      }
-
-
-    },
-    cacheTemplate: function() {
-      this.template = $('#inventory_item').remove().html();
-    },
-    init: function() {
-      this.setDate();
-      this.cacheTemplate();
-      this.bindEvents();
     },
   };
 })();
 
-$(inventory.init.bind(inventory));
+inventory.bindEvents();
 
 
