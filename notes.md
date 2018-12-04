@@ -57,3 +57,5 @@
     });
   ```
 
+* Note: jQuery's `$.proxy()` method is similar to javaScript built in `bind` method. `bind` was only introduced in ES5.
+
