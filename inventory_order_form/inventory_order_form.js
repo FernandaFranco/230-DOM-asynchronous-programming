@@ -28,7 +28,7 @@ var inventory;
     },
     get: function(id) {
       var foundItem;
-      this.collection.each(function(item) {
+      $.each(this.collection, function(item) {
         if (item.id === id) {
           foundItem = item;
           return false;
@@ -39,11 +39,12 @@ var inventory;
     },
     update: function($item) {
       var id = this.findId($item);
+      console.log(id);
       var item = this.get(id);
       console.log(item);
-      var item.name = $item.find('[name^=item_name]').val();
-      var item.stockNumber = $item.find('[name^=item_stock_number]').val();
-      var item.quantity = $item.find('[name^=item_quantity]').val();
+      item.name = $item.find('[name^=item_name]').val();
+      item.stockNumber = $item.find('[name^=item_stock_number]').val();
+      item.quantity = $item.find('[name^=item_quantity]').val();
     },
     newItem: function(event) {
       event.preventDefault();
