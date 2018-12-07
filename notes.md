@@ -59,3 +59,11 @@
 
 * Note: jQuery's `$.proxy()` method is similar to javaScript built in `bind` method. `bind` was only introduced in ES5.
 
+* Note - Handlebars: precompile templates in production apps
+
+* AJAX
+
+  * asynchronous JavaScript and XML
+  * obtain from and send to server data without reloading the page.
+  * provides modern applications a 'snappy' or immediate response feeling.
+  * AJAX requests can be difficult to work across browsers: jQuery's `$.ajax()` method provides Ajax support that abstracts away painful browser differences.
