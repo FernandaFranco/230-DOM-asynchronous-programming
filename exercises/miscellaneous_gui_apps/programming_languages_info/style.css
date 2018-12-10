@@ -1,0 +1,41 @@
+@import url('whitespace-reset.css');
+
+body {
+  background: #999900;
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  padding: 20px;
+}
+
+dl {
+  background: #ffffff;
+  width: 600px;
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+dt {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.show {
+  background: #999900;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.hidden {
+  display: none;
+}
