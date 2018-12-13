@@ -1,0 +1,58 @@
+@import url('whitespace-reset.css');
+
+html {
+  background-color: #53be43;
+}
+
+main {
+  width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #fff;
+  font-size: 24px;
+  padding: 40px 0 20px 0;
+}
+
+form {
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 40px 0 20px 20px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px 0 10px 10px;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  width: 300px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+input[type="text"].invalid,
+input[type="number"].invalid,
+input[type="email"].invalid,
+input[type="password"].invalid {
+  border-color: #a93333;
+}
+
+input[type="text"].focus {
+  border-color: #53be43;
+}
+
+input[type="submit"] {
+  background-color: #53be43;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 18px;
+}

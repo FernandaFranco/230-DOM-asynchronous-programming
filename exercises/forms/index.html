@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>--Sign Up</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h2>Sign up Form</h2>
+      </header>
+      <form method="post" action="#">
+        <fieldset>
+          <dl>
+            <dt><label for="first_name">First Name</label></dt>
+            <dd><input type="text" required id="first_name" name="first_name" /></dd>
+            <dt><label for="last_name">Last Name</label></dt>
+            <dd><input type="text" required id="last_name" name="last_name" /></dd>
+            <dt><label for="email">Email</label></dt>
+            <dd><input type="email" required id="email" name="email" placeholder="someone@example.com" /></dd>
+            <dt><label for="password">Password</label></dt>
+            <dd><input type="password" required minlength="10" id="password" name="password" /></dd>
+            <dt><label for="phone_number">Phone Number</label></dt>
+            <dd><input type="text" id="phone_number" name="phone_number" placeholder="111-222-3333" /></dd>
+          </dl>
+          <input type="submit" name="submit_button" value="Sign Up" />
+        </fieldset>
+      </form>
+    </main>
+    <script src="form.js"></script>
+  </body>
+</html>
