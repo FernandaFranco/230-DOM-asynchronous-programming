@@ -11,21 +11,37 @@
       <header>
         <h2>Sign up Form</h2>
       </header>
-      <form method="post" action="#">
+      <form novalidate method="post" action="#">
         <fieldset>
+          <p class="error"></p>
           <dl>
             <dt><label for="first_name">First Name</label></dt>
-            <dd><input type="text" required id="first_name" name="first_name" /></dd>
+            <dd>
+              <input type="text" required id="first_name" name="first_name" />
+              <p class="error"></p>
+            </dd>
             <dt><label for="last_name">Last Name</label></dt>
-            <dd><input type="text" required id="last_name" name="last_name" /></dd>
+            <dd>
+              <input type="text" required id="last_name" name="last_name" />
+              <p class="error"></p>
+            </dd>
             <dt><label for="email">Email</label></dt>
-            <dd><input type="email" required id="email" name="email" placeholder="someone@example.com" /></dd>
+            <dd>
+              <input type="email" required pattern=".+@.+" id="email" name="email" placeholder="someone@example.com" />
+              <p class="error"></p>
+            </dd>
             <dt><label for="password">Password</label></dt>
-            <dd><input type="password" required minlength="10" id="password" name="password" /></dd>
+            <dd>
+              <input type="password" required pattern="\S{10,}" id="password" name="password" />
+              <p class="error"></p>
+            </dd>
             <dt><label for="phone_number">Phone Number</label></dt>
-            <dd><input type="text" id="phone_number" name="phone_number" placeholder="111-222-3333" /></dd>
+            <dd>
+              <input type="text" id="phone_number" name="phone_number" placeholder="111-222-3333" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+              <p class="error"></p>
+            </dd>
           </dl>
-          <input type="submit" name="submit_button" value="Sign Up" />
+          <button type="submit">Sign Up</button>
         </fieldset>
       </form>
     </main>
