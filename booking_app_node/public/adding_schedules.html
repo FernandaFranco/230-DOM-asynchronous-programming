@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Adding Schedules</title>
+    <meta charset="UTF-8" />
+    <script src="/javascripts/adding_schedules.js"></script>
+  </head>
+  <body>
+    <form method="post" action="/api/schedules">
+      <button>Add more schedules</button>
+      <fieldset>
+        <legend>Schedule 1</legend>
+        <label for="staff_id">Staff Name:
+          <select id="staff_id" name="staff_id"></select>
+        </label>
+        <label for="date">Date:
+          <input type="text" id="date" name="date" placeholder="mm-dd-yy" />
+        </label>
+        <label for="time">Time:
+          <input type="text" id="time" name="time" placeholder="hh:mm" />
+        </label>
+      </fieldset>
+      <input type="submit" name="submit" value="Submit" />
+    </form>
+  </body>
+</html>
