@@ -12,11 +12,12 @@
   - arrow functions don't have their own arguments object. use rest parameters as an alternative;
   - Use non-arrow functions for methods that will be called using the object.method() syntax. Those are the functions that will receive a meaningful this value from their caller.
   - Use arrow functions for everything else. (https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/)
+
 - Classes
   -
+
 - Enhanced Object Literals
   - Shorthand method definition:
-
   ```javascript
   // ES6 with method syntax
     {
@@ -29,10 +30,12 @@
   ```
 - Template Strings
   -
+
 - Destructuring
-  -
+  - READ https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/
 
 - Default + Rest + Spread
+  - READ https://hacks.mozilla.org/2015/05/es6-in-depth-rest-parameters-and-defaults/
   -  Rest: represent an indefinite number of arguments as an array.
     - `function len(...theArgs) { return theArgs.length } // len(1, 2, 3) returns 3`;
   - (param1 = defaultValue1, param2, …, paramN = defaultValueN) => { statements }
@@ -46,7 +49,12 @@
   - Const: can't be reassigned;
     - But the value it references can still be mutated;
     - An initializer for a constant is required; that is, you must specify its value in the same statement in which it's declared (which makes sense, given that it can't be changed later).
+
 - Iterators + For..Of
   - `for...in`
+
 - Promises
   - A returned object to which you attach callbacks, instead of passing callbacks into a function.
+  - extremely useful for async success/failure, because you're less interested in the exact time something became available, and more interested in reacting to the outcome. (https://developers.google.com/web/fundamentals/primers/promises#events_arent_always_the_best_way)
+
+
