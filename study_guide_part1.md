@@ -1,0 +1,15 @@
+- The DOM: Using Web APIs to work with the DOM
+  - the HTML you write is parsed by the browser and turned into the DOM.
+  - Use js to update the interface in response to actions triggered by the user or browser;
+  - jQuery library: adds to the functionality already provided by the browser
+- The event model
+  - event-driven programming for front-end development
+- Asynchronous Programming
+  - Ajax: set of techniques used to load data from the server without a browser page refresh.
+  - jQuery and the DOM
+    - selectors
+    - event handling
+    - DOM manipulation
+- Using the XHR object
+  - communicating with the server using XHR
+  - rendering the response to the page

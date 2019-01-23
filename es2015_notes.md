@@ -14,11 +14,38 @@
   - Use arrow functions for everything else. (https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/)
 
 - Classes
-  -
+  ```js
+  class Parent() {
+    constructor() {
+      // instance properties go here
+    }
+
+    foo() { // shorthand method definition
+
+    }
+
+    bar() { // instance methods
+
+    }
+  }
+
+  class Child extends Parent {
+    constructor() {
+      super();
+    }
+
+    baz() {
+
+    }
+  }
+
+  var child = new Child();
+  child.bar();
+  ```
 
 - Enhanced Object Literals
   - Shorthand method definition:
-  ```javascript
+  ```js
   // ES6 with method syntax
     {
       ...
@@ -29,16 +56,48 @@
     }
   ```
 - Template Strings
-  -
+  ```js
+  let name = 'Fernanda';
+  let age = 27;
+
+  let greeting = `Hi, my name is ${name}.
+I'm a ${age}-year-old lady!`;
+  ```
 
 - Destructuring
+  ```js
+  let tenses = ['me', 'you', 'she'];
+  let [ firstPerson ] = tenses;
+  ```
   - READ https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/
+  - You can destructure arguments;
 
 - Default + Rest + Spread
+  - Default parameter: (not restricted to primitive values)
+    ```js
+      function inc(number, increment = 1) {
+        return number + increment;
+      }
+      console.log(inc(2, 2)); // 4
+      console.log(inc(2));    // 3
+    ```
+  - Rest: represent an indefinite number of arguments as an array. Named parameter precedes by three dots becomes an array which contain the arguments.
+    ```js
+      let len = (...theArgs) => theArgs.length; // len(4, 4, 4) returns 3`;
+    ```
+  - Spread: split an array to single arguments which are passed to the function as separate arguments.
+    ```js
+      function sum(a, b, c) {
+        return a + b + c;
+      }
+      var args = [1, 2, 3];
+      console.log(sum(…args)); // 6
+    ```
   - READ https://hacks.mozilla.org/2015/05/es6-in-depth-rest-parameters-and-defaults/
-  -  Rest: represent an indefinite number of arguments as an array.
-    - `function len(...theArgs) { return theArgs.length } // len(1, 2, 3) returns 3`;
-  - (param1 = defaultValue1, param2, …, paramN = defaultValueN) => { statements }
+
+  ```js
+    let func = (param1 = defaultValue1, param2, …, paramN = defaultValueN) => { //statements };
+  ```
 
 - Let + Const
   - Block scoped (like in `if (true) { let name = 'Fido' }`); `var` is function scoped;
