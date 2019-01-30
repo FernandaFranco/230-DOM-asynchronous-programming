@@ -19,7 +19,13 @@
   - event-driven programming for front-end development
   - capturing and bubbling
     - event gets triggered on an element;
-    - during the capturing phase the
+    - during the capturing phase the event 'travels' from the outermost element until it reaches the target element, looking for any listeners for that events attached;
+    -  then in the bubbling phase, it 'travels' from the target element until it reaches the outermost element, also looking for any listeners;
+    - if `useCapture` is false, the listener will fire in the bubbling phase
+    - if true, it will get called in the capture phase;
+    - It is interesting to note that adding an event listener of the same type — "click" — to the same element doesn't overwrite the first one that was added.
+  - stopping propagation
+    - the `event.stopPropagation` method will stop an event from capturing down or bubbling up and firing up all other listeners;
   - event delegation
 - Asynchronous Programming
   - Asynchronous code: it doesn't run continuously or even when the runtime encounters it;
