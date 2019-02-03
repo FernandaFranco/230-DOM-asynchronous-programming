@@ -4,9 +4,10 @@
   - DOM nodes/elements methods and properties:
   ```js
   var p = document.querySelector("p")
+  p.contains // boolean, including caller element
   p.nodeName //'P'
   p.tagName //'P'
-  p.nodeValue vs p.textContent vs p.innerText
+  p.nodeValue vs p.textContent vs p.innerTextxx
   p.classList
   h1.style.color
   document.getElementById('content')
@@ -26,7 +27,12 @@
     - It is interesting to note that adding an event listener of the same type — "click" — to the same element doesn't overwrite the first one that was added.
   - stopping propagation
     - the `event.stopPropagation` method will stop an event from capturing down or bubbling up and firing up all other listeners;
+    - prevents subsequent listeners from firing;
   - event delegation
+  - event loop
+    - v8 is the runtime inside Chrome
+    - web apis: extra things the browser provides: DOM, XMLHttpRequest, setTimeout
+    - event loop: defers the execution of async callback functions until the stack is clear
 - Asynchronous Programming
   - Asynchronous code: it doesn't run continuously or even when the runtime encounters it;
   - Ajax: set of techniques used to load data from the server without a browser page refresh.
