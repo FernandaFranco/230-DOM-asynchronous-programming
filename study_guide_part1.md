@@ -4,6 +4,7 @@
   - DOM nodes/elements methods and properties:
   ```js
   var p = document.querySelector("p")
+  var elements = document.querySelectorAll(selector) // NodeList that we can converto to array
   p.contains // boolean, including caller element
   p.nodeName //'P'
   p.tagName //'P'
@@ -24,6 +25,7 @@
     -  then in the bubbling phase, it 'travels' from the target element until it reaches the outermost element, also looking for any listeners;
     - if `useCapture` is false, the listener will fire in the bubbling phase
     - if true, it will get called in the capture phase;
+    - `useCapture` determines whether the event handler gets called during the bubbling or capturing phase. Regardless of its value, the event goes through both phases.
     - It is interesting to note that adding an event listener of the same type — "click" — to the same element doesn't overwrite the first one that was added.
   - stopping propagation
     - the `event.stopPropagation` method will stop an event from capturing down or bubbling up and firing up all other listeners;
@@ -43,4 +45,5 @@
     - DOM manipulation
 - Using the XHR object
   - communicating with the server using XHR
+    - `XMLHttpRequest` is one of the browser APIs that provide network programming functionality to JavaScript applications. Libraries or utility functions often wrap this web API.
   - rendering the response to the page
