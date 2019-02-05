@@ -35,15 +35,72 @@
     - v8 is the runtime inside Chrome
     - web apis: extra things the browser provides: DOM, XMLHttpRequest, setTimeout
     - event loop: defers the execution of async callback functions until the stack is clear
+
 - Asynchronous Programming
   - Asynchronous code: it doesn't run continuously or even when the runtime encounters it;
-  - Ajax: set of techniques used to load data from the server without a browser page refresh.
+  - Ajax: Asynchronous JavaScript And XML
+    - set of techniques used to load data from the server without a browser page refresh.
+    - fetch data, typically HTML or XML, and update parts of a page.
   - jQuery and the DOM
     - jQuery library: adds to the functionality already provided by the browser
     - selectors
     - event handling
     - DOM manipulation
+
 - Using the XHR object
+  - `XMLHttpRequest` is one of the browser APIs that provide network programming functionality to JavaScript applications. Libraries or utility functions often wrap this web API.
+  - The name comes from its original use, which was to fetch XML documents over HTTP. Today, we use this object to load any data (typically HTML or JSON)
   - communicating with the server using XHR
-    - `XMLHttpRequest` is one of the browser APIs that provide network programming functionality to JavaScript applications. Libraries or utility functions often wrap this web API.
+    ```js
+      var request = new XMLHttpRequest();
+      request.open('GET', '/path');
+      request.send();
+
+      request.responseText;
+      request.status;
+      request.statusText;
+    ```
+
+    - data serialization:
+      - query strings
+        ```js
+          encodeURIComponent(title=Do Androids Dream of Electric Sheep?&year=1968;) //title=Do%20Androids%20Dream%20of%20Electric%20Sheep%3F&year=1968
+        ```
+        - if sending data serialized as query string with a POST request, you must include a Content-Type header with a value of `application/x-www-form-urlencoded`
+      - multipart form data
+        - `FormData` object can be used to collect data;
+        ```
+          POST /path HTTP/1.1
+          Host: example.test
+          Content-Length: 267
+          Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywDbHM6i57QWyAWro
+          Accept: */*
+
+          ------WebKitFormBoundarywDbHM6i57QWyAWro
+          Content-Disposition: form-data; name="title"
+
+          Do Androids Dream of Electric Sheep?
+          ------WebKitFormBoundarywDbHM6i57QWyAWro
+          Content-Disposition: form-data; name="year"
+
+          1968
+          ------WebKitFormBoundarywDbHM6i57QWyAWro--
+        ```
+      - JSON serialization
+        - GET request can return JSON, but POST must be used to send JSON data to the server
+        ```
+          POST /path HTTP/1.1
+          Host: example.test
+          Content-Length: 62
+          Content-Type: application/json; charset=utf-8
+          Accept: */*
+
+          {"title":"Do Androids Dream of Electric Sheep?","year":"1968"}
+      - It's best practice to include `charset=utf-8` in `Content-Type` except when using multipart form format.
+
   - rendering the response to the page
+    ```js
+      request.addEventListener('load', function(event) {
+        store.innerHTML = request.response;
+      });
+    ```
