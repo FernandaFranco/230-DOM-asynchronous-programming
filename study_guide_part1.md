@@ -99,8 +99,25 @@
       - It's best practice to include `charset=utf-8` in `Content-Type` except when using multipart form format.
 
   - rendering the response to the page
-    ```js
-      request.addEventListener('load', function(event) {
-        store.innerHTML = request.response;
-      });
-    ```
+    - We can retrieve HTML fragments (parts of whole pages) from a server and insert them into a page. This approach works well for applications that primarily use server-side rendering to generate the user interface:
+      ```js
+        request.addEventListener('load', function(event) {
+          store.innerHTML = request.response;
+        });
+      ```
+    - Another approach is loading data in a primitive data structure and render it with the client-side code. This situation often occurs when the user interface has widgets that the server doesn't render.
+      ```js
+        var request = new XMLHttpRequest();
+        request.open('GET', 'https://api.github.com/repos/rails/rails');
+        request.responseType = 'json';
+
+        request.addEventListener('load', function(event) {
+          // request.response will be the result of parsing the JSON response body
+          // or null if the body couldn't be parsed or another error
+          // occurred.
+
+          var data = request.response;
+        });
+
+        request.send();
+      ```
