@@ -123,4 +123,5 @@
         request.send();
       ```
   - Throttling XML requests
-
+  - delay sending XHR for a short period or not sending at all if we no longer need it;
+  - JSlibraries provide a function named `debounce`;

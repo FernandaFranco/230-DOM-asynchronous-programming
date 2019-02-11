@@ -1,169 +1,165 @@
-let Autocomplete = {
-  wrapInput() {
-    let wrapper = document.createElement('div');
-    wrapper.classList.add('autocomplete-wrapper');
-    this.input.parentNode.appendChild(wrapper);
-    wrapper.appendChild(this.input);
-  },
+function Autocomplete(input, url) {
+  this.input = input;
+  this.url = url;
 
-  createUI() {
-    let listUI = document.createElement('ul');
-    listUI.classList.add('autocomplete-ui');
-    this.input.parentNode.appendChild(listUI);
-    this.listUI = listUI;
+  this.listUI = null;
+  this.overlay = null;
 
-    let overlay = document.createElement('div');
-    overlay.classList.add('autocomplete-overlay');
-    overlay.style.width = this.input.clientWidth + 'px';
+  this.visible = false;
+  this.matches = [];
 
-    this.input.parentNode.appendChild(overlay);
-    this.overlay = overlay;
-  },
+  this.wrapInput();
+  this.createUI();
 
-  bindEvents() {
-    this.input.addEventListener('input', this.valueChanged.bind(this));
-    this.input.addEventListener('keydown', this.handleKeydown.bind(this));
-    this.listUI.addEventListener('mousedown', this.handleMousedown.bind(this));
-  },
+  this.valueChanged = debounce(this.valueChanged.bind(this), 300);
 
-  handleMousedown(event) {
-    event.preventDefault();
+  this.bindEvents();
+  this.reset();
+}
 
-    let element = event.target;
-    if (element.classList.contains('autocomplete-ui-choice')) {
-      this.input.value = element.textContent;
-      this.reset();
-    }
-  },
+Autocomplete.prototype.wrapInput = function() {
+  let wrapper = document.createElement('div');
+  wrapper.classList.add('autocomplete-wrapper');
+  this.input.parentNode.appendChild(wrapper);
+  wrapper.appendChild(this.input);
+};
 
-  handleKeydown(event) {
-    switch(event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        if (this.selectedIndex === null || this.selectedIndex === this.matches.length - 1) {
-          this.selectedIndex = 0;
-        } else {
-          this.selectedIndex += 1;
-        }
-        this.bestMatchIndex = null;
-        this.draw();
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        if (this.selectedIndex === null || this.selectedIndex === 0) {
-          this.selectedIndex = this.matches.length - 1;
-        } else {
-          this.selectedIndex -= 1;
-        }
-        this.bestMatchIndex = null;
-        this.draw();
-        break;
-      case 'Tab':
-        if (this.bestMatchIndex !== null) {
-          this.input.value = this.matches[this.bestMatchIndex].name;
-          event.preventDefault();
-        }
-        this.reset();
-        break;
-      case 'Enter':
-        this.reset();
-        break;
-      case 'Escape':
-        this.input.value = this.previousValue;
-        this.reset();
-        break;
-    }
-  },
+Autocomplete.prototype.createUI = function() {
+  let listUI = document.createElement('ul');
+  listUI.classList.add('autocomplete-ui');
+  this.input.parentNode.appendChild(listUI);
+  this.listUI = listUI;
 
-  valueChanged() {
-    let value = this.input.value;
-    this.previousValue = value;
+  let overlay = document.createElement('div');
+  overlay.classList.add('autocomplete-overlay');
+  overlay.style.width = this.input.clientWidth + 'px';
 
-    if (value.length > 0) {
-      this.fetchMatches(value, (matches) => {
-        this.visible = true;
-        this.matches = matches;
-        this.bestMatchIndex = 0;
-        this.selectedIndex = null;
-        this.draw();
-      });
-    } else {
-      this.reset();
-    }
-  },
+  this.input.parentNode.appendChild(overlay);
+  this.overlay = overlay;
+};
 
-  fetchMatches(query, callback) {
-    let request = new XMLHttpRequest();
+Autocomplete.prototype.bindEvents = function() {
+  this.input.addEventListener('input', this.valueChanged.bind(this));
+  this.input.addEventListener('keydown', this.handleKeydown.bind(this));
+  this.listUI.addEventListener('mousedown', this.handleMousedown.bind(this));
+};
 
-    request.addEventListener('load', () => {
-      callback(request.response);
-    });
+Autocomplete.prototype.handleMousedown = function(event) {
+  event.preventDefault();
 
-    request.open('GET', this.url + encodeURIComponent(query));
-    request.responseType = 'json';
-    request.send();
-  },
-
-  draw() {
-    let child;
-    while (child = this.listUI.lastChild) {
-      this.listUI.removeChild(child);
-    }
-
-    if (!this.visible) {
-      this.overlay.textContent = '';
-      return;
-    }
-
-    if (this.bestMatchIndex !== null) {
-      let selected = this.matches[this.bestMatchIndex];
-      this.overlay.textContent = selected.name;
-    } else {
-      this.overlay.textContent = '';
-    }
-
-    this.matches.forEach((match, index) => {
-      let li = document.createElement('li');
-      li.classList.add('autocomplete-ui-choice');
-
-      if (index === this.selectedIndex) {
-        li.classList.add('selected');
-        this.input.value = match.name;
-      }
-
-      li.textContent = match.name;
-      this.listUI.appendChild(li);
-    });
-  },
-
-  reset() {
-    this.visible = false;
-    this.matches = [];
-    this.bestMatchIndex = null;
-    this.selectedIndex = null;
-    this.previousValue = null;
-
-    this.draw();
-  },
-
-  init() {
-    this.input = document.querySelector('input');
-    this.url = '/countries?matching=';
-
-    this.listUI = null;
-    this.overlay = null;
-
-    this.visible = false;
-    this.matches = [];
-
-    this.wrapInput();
-    this.createUI();
-    this.bindEvents();
-
+  let element = event.target;
+  if (element.classList.contains('autocomplete-ui-choice')) {
+    this.input.value = element.textContent;
     this.reset();
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  Autocomplete.init();
-});
+Autocomplete.prototype.handleKeydown = function(event) {
+  switch(event.key) {
+    case 'ArrowDown':
+      event.preventDefault();
+      if (this.selectedIndex === null || this.selectedIndex === this.matches.length - 1) {
+        this.selectedIndex = 0;
+      } else {
+        this.selectedIndex += 1;
+      }
+      this.bestMatchIndex = null;
+      this.draw();
+      break;
+    case 'ArrowUp':
+      event.preventDefault();
+      if (this.selectedIndex === null || this.selectedIndex === 0) {
+        this.selectedIndex = this.matches.length - 1;
+      } else {
+        this.selectedIndex -= 1;
+      }
+      this.bestMatchIndex = null;
+      this.draw();
+      break;
+    case 'Tab':
+      if (this.bestMatchIndex !== null) {
+        this.input.value = this.matches[this.bestMatchIndex].name;
+        event.preventDefault();
+      }
+      this.reset();
+      break;
+    case 'Enter':
+      this.reset();
+      break;
+    case 'Escape':
+      this.input.value = this.previousValue;
+      this.reset();
+      break;
+  }
+};
+
+Autocomplete.prototype.valueChanged = function() {
+  let value = this.input.value;
+  this.previousValue = value;
+
+  if (value.length > 0) {
+    this.fetchMatches(value, (matches) => {
+      this.visible = true;
+      this.matches = matches;
+      this.bestMatchIndex = 0;
+      this.selectedIndex = null;
+      this.draw();
+    });
+  } else {
+    this.reset();
+  }
+};
+
+Autocomplete.prototype.fetchMatches = function(query, callback) {
+  let request = new XMLHttpRequest();
+
+  request.addEventListener('load', () => {
+    callback(request.response);
+  });
+
+  request.open('GET', this.url + encodeURIComponent(query));
+  request.responseType = 'json';
+  request.send();
+};
+
+Autocomplete.prototype.draw = function() {
+  let child;
+  while (child = this.listUI.lastChild) {
+    this.listUI.removeChild(child);
+  }
+
+  if (!this.visible) {
+    this.overlay.textContent = '';
+    return;
+  }
+
+  if (this.bestMatchIndex !== null) {
+    let selected = this.matches[this.bestMatchIndex];
+    this.overlay.textContent = selected.name;
+  } else {
+    this.overlay.textContent = '';
+  }
+
+  this.matches.forEach((match, index) => {
+    let li = document.createElement('li');
+    li.classList.add('autocomplete-ui-choice');
+
+    if (index === this.selectedIndex) {
+      li.classList.add('selected');
+      this.input.value = match.name;
+    }
+
+    li.textContent = match.name;
+    this.listUI.appendChild(li);
+  });
+};
+
+Autocomplete.prototype.reset = function() {
+  this.visible = false;
+  this.matches = [];
+  this.bestMatchIndex = null;
+  this.selectedIndex = null;
+  this.previousValue = null;
+
+  this.draw();
+};
