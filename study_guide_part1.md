@@ -19,6 +19,7 @@
 
 - The event model
   - event-driven programming for front-end development
+  - `event.key` might not be supported by Microsoft and Safari browsers. Use `event.which` instead, but it is a deprecated property and might not be supported by browsers in the future;
   - capturing and bubbling
     - event gets triggered on an element;
     - during the capturing phase the event 'travels' from the outermost element until it reaches the target element, looking for any listeners for that events attached;
@@ -121,3 +122,5 @@
 
         request.send();
       ```
+  - Throttling XML requests
+
