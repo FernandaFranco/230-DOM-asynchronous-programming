@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Hello there</title>
+    <meta charset="UTF-8" />
+    <!-- <script src="/javascripts/getting_schedules.js"></script> -->
+    <script>
+      let getAvailableSchedules = () => {
+        let request = new XMLHttpRequest();
+        request.open('GET', '/api/schedules');
+        request.responseType = 'json';
+        request.timeout = 7000;
+
+        let filter_available = (event) => {
+          let result = {};
+          let schedules = event.target.response;
+          let available = schedules.filter((schedule) => { return schedule.student_email === null });
+
+          available.forEach((schedule) => {
+            if (result[schedule.staff_id]) {
+              result[schedule.staff_id] += 1;
+            } else {
+              result[schedule.staff_id] = 1;
+            }
+          });
+
+
+          document.body.textContent = JSON.stringify(result);
+          // document.body.textContent = JSON.stringify(schedules);
+        }
+
+        request.addEventListener('load', filter_available);
+        request.addEventListener('timeout', () => document.body.textContent = 'Try again!');
+        request.addEventListener('loadend', () => document.body.appendChild(document.createTextNode('The request has been completed.')));
+
+        request.send();
+      }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
