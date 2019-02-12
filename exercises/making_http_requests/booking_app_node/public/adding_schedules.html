@@ -3,13 +3,24 @@
   <head>
     <title>Adding Schedules</title>
     <meta charset="UTF-8" />
-    <script src="/javascripts/adding_schedules.js"></script>
+    <!-- <script src="/javascripts/adding_schedules.js"></script> -->
   </head>
   <body>
     <form method="post" action="/api/schedules">
       <button>Add more schedules</button>
-      <fieldset>
-        <legend>Schedule 1</legend>
+
+      <input type="submit" name="submit" value="Submit" />
+    </form>
+    <script>
+      let form = document.querySelector('form');
+      let submit = document.querySelector("input[type='submit']");
+      let addButton = document.querySelector('button');
+      let schedulesCount = 0;
+
+      let createNewSchedule = () => {
+        schedulesCount += 1;
+
+        let fieldsetHTML = `<fieldset id="schedule_${schedulesCount}"><legend>Schedule ${schedulesCount}</legend>
         <label for="staff_id">Staff Name:
           <select id="staff_id" name="staff_id"></select>
         </label>
@@ -18,9 +29,62 @@
         </label>
         <label for="time">Time:
           <input type="text" id="time" name="time" placeholder="hh:mm" />
-        </label>
-      </fieldset>
-      <input type="submit" name="submit" value="Submit" />
-    </form>
+        </label></fieldset`
+
+        submit.insertAdjacentHTML('beforebegin', fieldsetHTML);
+        populateStaffList(schedulesCount);
+      }
+
+      let populateStaffList = (schedulesCount) => {
+        let request = new XMLHttpRequest();
+        request.open('GET', '/api/staff_members');
+        request.responseType = 'json';
+
+        request.addEventListener('load', (event) => {
+          request.response.forEach((staff) => {
+            let fieldset = document.getElementById(`schedule_${schedulesCount}`)
+            let option = document.createElement('option');
+            let select = fieldset.querySelector('select');
+            option.textContent = staff.name;
+            option.value = staff.id;
+            select.appendChild(option);
+          });
+        });
+
+        request.send();
+      }
+
+      let jsonifiedForm = () => {
+        let schedules = [];
+
+      };
+
+      addButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        createNewSchedule();
+      })
+
+      submit.addEventListener('click', (event) => {
+        event.preventDefault();
+        let json = jsonifiedForm();
+        let request = new XMLHttpRequest();
+        request.open('POST', form.action);
+        request.addRequestHeader('Content-Type', 'application/json');
+
+        request.addEventListener('load', (event) => {
+          if (request.status === 201) {
+            alert('sucess');
+          } else {
+            alert(request.responseText);
+          }
+        });
+
+        request.send(json);
+      });
+
+      createNewSchedule();
+
+
+    </script>
   </body>
 </html>

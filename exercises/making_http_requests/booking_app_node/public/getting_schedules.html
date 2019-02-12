@@ -6,15 +6,24 @@
     <!-- <script src="/javascripts/getting_schedules.js"></script> -->
     <script>
       let getAvailableSchedules = () => {
+        document.body.innerHTML = '';
         let request = new XMLHttpRequest();
         request.open('GET', '/api/schedules');
         request.responseType = 'json';
-        request.timeout = 7000;
+        request.timeout = 5000;
 
         let filter_available = (event) => {
           let result = {};
           let schedules = event.target.response;
-          let available = schedules.filter((schedule) => { return schedule.student_email === null });
+          // let available = schedules.filter((schedule) => { return schedule.student_email === null });
+          let available = schedules;
+
+          if (available.length < 1) {
+            let p = document.createElement('p');
+            p.textContent = 'There are currently no schedules available for booking';
+            document.body.appendChild(p);
+            return;
+          }
 
           available.forEach((schedule) => {
             if (result[schedule.staff_id]) {
@@ -24,15 +33,26 @@
             }
           });
 
-
-          document.body.textContent = JSON.stringify(result);
-          // document.body.textContent = JSON.stringify(schedules);
+          Object.keys(result).forEach(key => {
+            let p = document.createElement('p');
+            p.textContent = `staff ${key}: ${result[key]}`;
+            document.body.appendChild(p);
+          });
         }
 
         request.addEventListener('load', filter_available);
-        request.addEventListener('timeout', () => document.body.textContent = 'Try again!');
-        request.addEventListener('loadend', () => document.body.appendChild(document.createTextNode('The request has been completed.')));
+        request.addEventListener('timeout', () => {
+          let p = document.createElement('p');
+          p.textContent = 'It is taking longer than usual, please try again later.';
 
+          document.body.appendChild(p);
+        });
+        request.addEventListener('loadend', () => {
+          let p = document.createElement('p');
+          p.textContent = 'The request has been completed.';
+
+          document.body.appendChild(p);
+        });
         request.send();
       }
     </script>
