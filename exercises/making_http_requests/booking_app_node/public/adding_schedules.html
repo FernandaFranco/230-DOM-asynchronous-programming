@@ -16,19 +16,32 @@
       let submit = document.querySelector("input[type='submit']");
       let addButton = document.querySelector('button');
       let schedulesCount = 0;
+      let staffList;
+
+      (() => {
+        let request = new XMLHttpRequest();
+        request.open('GET', '/api/staff_members');
+        request.responseType = 'json';
+
+        request.addEventListener('load', (event) => {
+          staffList = request.response;
+        });
+
+        request.send();
+      })();
 
       let createNewSchedule = () => {
         schedulesCount += 1;
 
         let fieldsetHTML = `<fieldset id="schedule_${schedulesCount}"><legend>Schedule ${schedulesCount}</legend>
-        <label for="staff_id">Staff Name:
-          <select id="staff_id" name="staff_id"></select>
+        <label for="staff_${schedulesCount}">Staff Name:
+          <select id="staff_${schedulesCount}" name="staff_${schedulesCount}"></select>
         </label>
-        <label for="date">Date:
-          <input type="text" id="date" name="date" placeholder="mm-dd-yy" />
+        <label for="date_${schedulesCount}">Date:
+          <input type="text" class="date" id="date_${schedulesCount}" name="date_${schedulesCount}" placeholder="mm-dd-yy" />
         </label>
-        <label for="time">Time:
-          <input type="text" id="time" name="time" placeholder="hh:mm" />
+        <label for="time_${schedulesCount}">Time:
+          <input type="text" class="time" id="time_${schedulesCount}" name="time_${schedulesCount}" placeholder="hh:mm" />
         </label></fieldset`
 
         submit.insertAdjacentHTML('beforebegin', fieldsetHTML);
@@ -36,27 +49,28 @@
       }
 
       let populateStaffList = (schedulesCount) => {
-        let request = new XMLHttpRequest();
-        request.open('GET', '/api/staff_members');
-        request.responseType = 'json';
-
-        request.addEventListener('load', (event) => {
-          request.response.forEach((staff) => {
+        staffList.forEach((staff) => {
             let fieldset = document.getElementById(`schedule_${schedulesCount}`)
             let option = document.createElement('option');
             let select = fieldset.querySelector('select');
             option.textContent = staff.name;
             option.value = staff.id;
             select.appendChild(option);
-          });
         });
-
-        request.send();
-      }
+      };
 
       let jsonifiedForm = () => {
         let schedules = [];
+        let fieldsets = [].slice.call(form.children, 1, -1);
+        fieldsets.forEach((fieldset) => {
+          let schedule = {};
+          schedule.staff_id = fieldset.querySelector('select').value;
+          schedule.date = fieldset.querySelector('.date').value;
+          schedule.time = fieldset.querySelector('.time').value;
+          schedules.push(schedule);
+       });
 
+        return JSON.stringify({ schedules: schedules });
       };
 
       addButton.addEventListener('click', (event) => {
@@ -64,16 +78,17 @@
         createNewSchedule();
       })
 
-      submit.addEventListener('click', (event) => {
+      form.addEventListener('submit', (event) => {
         event.preventDefault();
         let json = jsonifiedForm();
         let request = new XMLHttpRequest();
         request.open('POST', form.action);
-        request.addRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Content-Type', 'application/json');
 
         request.addEventListener('load', (event) => {
           if (request.status === 201) {
             alert('sucess');
+            form.reset();
           } else {
             alert(request.responseText);
           }
@@ -82,9 +97,7 @@
         request.send(json);
       });
 
-      createNewSchedule();
-
-
+      // createNewSchedule();
     </script>
   </body>
 </html>
