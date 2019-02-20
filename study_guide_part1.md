@@ -44,8 +44,53 @@
     - fetch data, typically HTML or XML, and update parts of a page.
   - jQuery and the DOM
     - jQuery library: adds to the functionality already provided by the browser
+    - width() and height() return and use numeric values, not string values like css() does;
+    -  jQuery also accepts camel case property names instead. Whenever you have a CSS property that includes one or more hyphens, you can omit the hyphens and capitalize the next letter instead. For font-size, for example, you can use fontSize instead
+    - jQuery methods:
+    ```js
+      css()
+      filter()
+      find()
+      attr()
+      each()
+      eq(index) // gives jQuery object back, instead of DOM element
+      hide()
+      show() // restores display to previous value
+      val()
+      prop() // when dealing with select and checkboxes, use prop instead of attr
+      attr()
+      parent()
+      parents()
+      closest()
+      text()
+      addClass
+      on(eventType, callback)
+      off
+      click
+      submit
+      trigger(eventType)
+      get() // w/o args returns array of DOM objects. accepts negative values
+      prependTo()
+      before()
+      insertBefore()
+      $(window).scrollTop()
+      fadeIn()
+      fadeOut()
+      stop()
+    ```
     - selectors
+      - jQuery specific selectors:
+      ```js
+        :checked
+        :visible
+        :hidden
+        :text
+        :submit
+        :contains('ac ante')
+        :not(".protected")
+      ```
     - event handling
+      - jQuery allows chaining of methods, incluiding event binding
     - DOM manipulation
 
 - Using the XHR object
