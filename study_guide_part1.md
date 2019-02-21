@@ -77,6 +77,9 @@
       fadeIn()
       fadeOut()
       stop()
+      finish() // like calling stop(true, true)
+      delay()
+      $.fx.off
     ```
     - selectors
       - jQuery specific selectors:
