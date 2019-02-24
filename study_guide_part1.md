@@ -54,6 +54,7 @@
       attr()
       each()
       eq(index) // gives jQuery object back, instead of DOM element
+      get() // w/o args returns array of DOM objects. accepts negative values
       hide()
       show() // restores display to previous value
       val()
@@ -68,8 +69,8 @@
       off
       click
       submit
+      keypress
       trigger(eventType)
-      get() // w/o args returns array of DOM objects. accepts negative values
       prependTo()
       before()
       insertBefore()
@@ -80,6 +81,9 @@
       finish() // like calling stop(true, true)
       delay()
       $.fx.off
+      data() // to change html, use attr()
+      is()
+      event.which() //for keyboard key input; returns char code
     ```
     - selectors
       - jQuery specific selectors:
@@ -89,6 +93,8 @@
         :hidden
         :text
         :submit
+        :checkbox
+        :input // not only input elements, but buttons, textarea and select
         :contains('ac ante')
         :not(".protected")
       ```
@@ -173,3 +179,21 @@
   - Throttling XML requests
   - delay sending XHR for a short period or not sending at all if we no longer need it;
   - JSlibraries provide a function named `debounce`;
+
+  - Handlebars
+
+    - <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
+    - <script id='template' type='text/x-handlebars'>...</script>
+    ```js
+      var template = Handlebars.compile($('#template').html());
+      $container.html(template(object));
+    ```
+
+    - {{#each items}} -> $list.html(productTemplate({ items: products }));
+    - {{@index}}
+    - {{/each}}
+    - {{name}}
+    - {{#if}}
+    - {{else}}
+    - {{/if}}
+    - {{> productTemplate}} -> using partials
