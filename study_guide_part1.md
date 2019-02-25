@@ -191,9 +191,23 @@
 
     - {{#each items}} -> $list.html(productTemplate({ items: products }));
     - {{@index}}
+    - {{this}}
     - {{/each}}
     - {{name}}
     - {{#if}}
     - {{else}}
     - {{/if}}
+
+    ```js
+    // Compile both templates for use later
+    var productsList = Handlebars.compile($('#productsList').html());
+    var productTemplate = Handlebars.compile($('#productTemplate').html());
+
+    // Also register the product template as a partial
+    Handlebars.registerPartial('productTemplate', $('#productTemplate').html());
+
+    // Write the current list to the page
+    $list.html(productsList({ items: products }));
+
+    ```
     - {{> productTemplate}} -> using partials

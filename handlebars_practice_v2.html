@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Handlebars practice</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <script id="post" type="text/x-handlebars">
+      {{#each posts}}
+        <article>
+          <h1>{{title}}</h1>
+          <p><time>Posted on {{published}}</time></p>
+          {{{body}}}
+          {{#if tags}}
+            <h2>Tags</h2>
+            {{#each tags}}
+              {{>partial}}
+            {{/each}}
+          {{else}}
+            <p>Not tagged</p>
+          {{/if}}
+        </article>
+      {{/each}}
+    </script>
+    <script id="partial" type="text/x-handlebars">
+      <span>{{this}}</span>
+    </script>
+    <script>
+      var post1 = {
+        title: 'Lorem ipsum dolor sit amet',
+        published: 'April 1, 2015',
+        body: '<strong>Sed</strong> ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+        tags: ['drama', 'catfight', 'whatyearisthis'],
+      };
+
+      var post2 = {
+        title: 'Lorem ipsum dolor sit amet',
+        published: 'April 1, 2015',
+        body: '<strong>Sed</strong> ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+      };
+
+      var posts = [post1, post2];
+
+      var template = Handlebars.compile($('#post').html());
+      var partial = Handlebars.compile($('#partial').html());
+      Handlebars.registerPartial('partial', $('#partial').html());
+
+      $('body').append(template({ posts: posts }));
+    </script>
+  </body>
+</html>
