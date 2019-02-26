@@ -4,7 +4,7 @@
   - DOM nodes/elements methods and properties:
   ```js
   var p = document.querySelector("p")
-  var elements = document.querySelectorAll(selector) // NodeList that we can converto to array
+  var elements = document.querySelectorAll(selector) // NodeList that we can convert to to array
   p.contains // boolean, including caller element
   p.nodeName //'P'
   p.tagName //'P'
