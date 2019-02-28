@@ -1,5 +1,6 @@
-$(function() {
-  function errorMessage(id) {
+
+var App = {
+  errorMessage: function(id) {
     switch (id) {
       case 'first_name':
       return 'First name is required.';
@@ -12,20 +13,20 @@ $(function() {
       case 'phone':
       return 'Invalid phone number. Please provide a phone number in the following pattern: 111-222-3333';
     }
-  }
-  $('fieldset').on('blur', 'input', function(e) {
-    var $input = $(this);
+  },
+  validateInput: function(e) {
+    var input = e.currentTarget;
+    var $input = $(input);
 
-    if (!this.checkValidity()) {
+    if (!input.checkValidity()) {
       $input.css('border-color', 'red');
-      $('<p></p>').insertAfter($input).text(errorMessage(this.id));
+      $('<p></p>').insertAfter($input).text(this.errorMessage(input.id));
     } else {
       $input.attr('style', '');
       $input.next('p').remove();
     }
-  });
-
-  $('form').on('submit', function(e) {
+  },
+  checkForErrors: function(e) {
     e.preventDefault();
     $('dl input').each(function() {
       if (!this.checkValidity()) {
@@ -35,5 +36,20 @@ $(function() {
         return false;
       }
     });
-  });
-});
+  },
+  removeErrors: function(e) {
+    var $input = $(e.currentTarget);
+    $input.attr('style', '');
+    $input.next('p').remove();
+  },
+  bindEventHandlers: function() {
+    $('fieldset').on('blur', 'input', this.validateInput.bind(this));
+    $('fieldset').on('focus', 'input', this.removeErrors.bind(this));
+    $('form').on('submit', this.checkForErrors.bind(this));
+  },
+  init: function() {
+    this.bindEventHandlers();
+  },
+};
+
+$(App.init.bind(App));
