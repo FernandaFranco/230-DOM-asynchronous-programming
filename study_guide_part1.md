@@ -211,7 +211,3 @@
 
     ```
     - {{> productTemplate}} -> using partials
-
-`currentTarget` points to the same object as `this` in the context of the event listener callback function.
-
-Neither method have side effects. They don't displace the elements inside the DOM, they simply return a reference to those elements.
