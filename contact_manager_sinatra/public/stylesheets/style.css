@@ -1,0 +1,115 @@
+@import "whitespace-reset.css";
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  background-color: #604688;
+  color: #ffffff;
+  text-align: center;
+  padding: 25px;
+  line-height: 1.4;
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 500;
+}
+
+header h2 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #c6bfe3;
+  padding: 5px 0;
+}
+
+#search_container {
+  padding: 20px 0;
+  margin: 0 50px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid #563d7d;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin: 10px;
+  font-size: 18px;
+  color: #563d7d;
+  text-decoration: none;
+  display: inline-block;
+
+}
+
+.button:hover {
+background-color: #563d7d;
+color: #ffffff;
+}
+
+::placeholder {
+  color: #cccccc;
+}
+
+input {
+  padding: 8px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#search_bar {
+  width: 50%;
+  vertical-align: middle;
+}
+
+#no_contacts {
+  padding: 20px 0;
+  margin: 30px 60px 60px 60px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+#no_contacts h1 {
+  font-size: 24px;
+  font-weight: 500;
+
+}
+
+#create_contact h1 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 500;
+  padding: 30px;
+}
+
+#create_contact input[type='text'] {
+  width: 90%;
+  margin: 0 auto;
+}
+
+footer {
+  border-top: 1px solid #dddddd;
+  margin: 50px;
+  padding: 20px;
+}
+
+footer p {
+  font-size: 14px;
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: #2a6496;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

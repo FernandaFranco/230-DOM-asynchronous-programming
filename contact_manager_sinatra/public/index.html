@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/handlebars.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.3.4/babel.min.js"></script>
+    <script type="text/babel" src="/javascripts/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Contact Manager</h1>
+      <!-- <h2>Using jQuery, Handlebars and ES6</h2> -->
+      <h2>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</h2>
+    </header>
+    <main>
+      <div id="home_container">
+        <div id="search_container">
+          <form>
+            <fieldset>
+              <a class="add_contact button" href="#">Add Contact</a>
+              <input id="search_bar" type="text" name="search_bar" placeholder="Search" />
+            </fieldset>
+          </form>
+        </div>
+        <div id="contacts_container">
+          <div id="no_contacts">
+            <h1>There is no contacts.</h1>
+            <a class="add_contact button" href="#">Add Contact</a>
+          </div>
+        </div>
+      </div>
+        <form id="create_contact">
+          <h1>Create Contact</h1>
+          <fieldset>
+            <dl>
+              <dt>
+                <label for="full_name">Full name:</label>
+              </dt>
+              <dd>
+                <input type="text" id="full_name" name="full_name" />
+              </dd>
+              <dt>
+                <label for="email">Email address:</label>
+              </dt>
+              <dd>
+                <input type="email" id="email" name="email" />
+              </dd>
+              <dt>
+                <label for="phone">Telephone number:</label>
+              </dt>
+              <dd>
+                <input type="text" id="phone" name="phone" />
+              </dd>
+              <dt>
+                <label for="tags">Tags:</label>
+              </dt>
+              <dd>
+                <input type="text" id="tags" name="tags" />
+              </dd>
+            </dl>
+            <input class="button" type="submit" value="Submit" />
+            <a id="cancel" class="button" href="#">Cancel</a>
+          </fieldset>
+        </form>
+    </main>
+    <footer>
+      <!-- <p>Developed by Fernanda Franco.</p> -->
+      <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate</a>.</p>
+    </footer>
+    <script id="tags_template" type="text/x-handlebars-template">
+      <ul id="taglist">
+        {{#each tags}}
+          {{> tag}}
+        {{/each}}
+      </ul>
+    </script>
+    <script id="tag_template" type="text/x-handlebars-template">
+      <li id="tagitem">
+        <input type="checkbox" id="{{tagname}}" name="{{tagname}}" />
+        <label for="{{tagname}}">{{tagname}}</label>
+      </li>
+    </script>
+  <script id="contacts_template" type="text/x-handlebars-template">
+      {{#each contacts}}
+        {{> contact}}
+      {{/each}}
+    </script>
+    <script id="contact_template" type="text/x-handlebars-template">
+      <div class="contact">
+          <h1>{{full_name}}</h1>
+          <dl>
+            <dt>Phone Number:</dt>
+            <dd>{{phone_number}}</dd>
+            <dt>Email:</dt>
+            <dd>{{email}}</dd>
+            <dt>Tags:</dt>
+            <dd>
+              {{#each tags}}
+                <a href="" data-tag="{{this}}">{{this}}</a>
+              {{/each}}
+            </dd>
+          </dl>
+          <a class="edit" href="/api/contacts/{{id}}">Edit</a>
+          <a class="delete" href="/api/contacts/{{id}}">Delete</a>
+        </div>
+    </script>
+  </body>
+</html>
