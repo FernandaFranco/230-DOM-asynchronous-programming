@@ -63,7 +63,7 @@ input {
 }
 
 #search_bar {
-  width: 50%;
+  width: 40%;
   vertical-align: middle;
 }
 
@@ -83,22 +83,52 @@ input {
 }
 
 #create_contact {
-}
-#create_contact h1 {
+  display: none;
+  width: 100%;
+  padding: 30px 20px;
+  box-sizing: border-box;
   text-align: center;
-  font-size: 28px;
-  font-weight: 500;
-  padding: 30px;
+  background-color: #ffffff;
 }
 
-#create_contact input[type='text'],
-#create_contact input[type='email'] {
-  width: 90%;
+#create_contact h1 {
+  font-size: 28px;
+  font-weight: 500;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+#create_contact dl {
+  margin: 20px 0;
+}
+
+#create_contact dt,
+#create_contact dd {
+  display: inline-block;
+}
+
+#create_contact dt {
+  width: 150px;
+  text-align: right;
+}
+
+#create_contact dd {
+  width: 60%;
+}
+
+#create_contact label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#create_contact input[type="text"],
+#create_contact input[type="email"] {
+  width: 100%;
 }
 
 footer {
   border-top: 1px solid #dddddd;
-  margin: 50px;
+  margin: 50px 20px;
   padding: 20px;
 }
 

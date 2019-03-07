@@ -14,8 +14,8 @@
   <body>
     <header>
       <h1>Contact Manager</h1>
-      <!-- <h2>Using jQuery, Handlebars and ES6</h2> -->
-      <h2>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</h2>
+      <h2>Using jQuery, Handlebars and ES6</h2>
+      <!-- <h2>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</h2> -->
     </header>
     <main>
       <div id="home_container">
@@ -34,44 +34,51 @@
           </div>
         </div>
       </div>
-        <form id="create_contact">
-          <h1>Create Contact</h1>
-          <fieldset>
-            <dl>
-              <dt>
-                <label for="full_name">Full name:</label>
-              </dt>
-              <dd>
-                <input type="text" id="full_name" name="full_name" />
-              </dd>
-              <dt>
-                <label for="email">Email address:</label>
-              </dt>
-              <dd>
-                <input type="email" id="email" name="email" />
-              </dd>
-              <dt>
-                <label for="phone">Telephone number:</label>
-              </dt>
-              <dd>
-                <input type="text" id="phone" name="phone" />
-              </dd>
-              <dt>
-                <label for="tags">Tags:</label>
-              </dt>
-              <dd>
-                <input type="text" id="tags" name="tags" />
-              </dd>
-            </dl>
-            <input class="button" type="submit" value="Submit" />
-            <a id="cancel" class="button" href="#">Cancel</a>
-          </fieldset>
-        </form>
+      <form id="create_contact" method="post" action="">
+        <h1>Create Contact</h1>
+        <fieldset>
+          <dl>
+            <dt>
+              <label for="full_name">Full name:</label>
+            </dt>
+            <dd>
+              <input type="text" id="full_name" name="full_name" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="email">Email address:</label>
+            </dt>
+            <dd>
+              <input type="email" id="email" name="email" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="phone">Telephone number:</label>
+            </dt>
+            <dd>
+              <input type="text" id="phone" name="phone" />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="tags">Tags:</label>
+            </dt>
+            <dd>
+              <input type="text" id="tags" name="tags" />
+            </dd>
+          </dl>
+          <input class="button" type="submit" value="Submit" />
+          <a id="cancel" class="button" href="#">Cancel</a>
+        </fieldset>
+      </form>
     </main>
     <footer>
-      <!-- <p>Developed by Fernanda Franco.</p> -->
-      <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate</a>.</p>
+      <p>Developed by <a href="#">Fernanda Franco</a>.</p>
+      <!-- <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate</a>.</p> -->
     </footer>
+
     <script id="tags_template" type="text/x-handlebars-template">
       <ul id="taglist">
         {{#each tags}}
@@ -81,8 +88,8 @@
     </script>
     <script id="tag_template" type="text/x-handlebars-template">
       <li id="tagitem">
-        <input type="checkbox" id="{{tagname}}" name="{{tagname}}" />
-        <label for="{{tagname}}">{{tagname}}</label>
+        <input type="checkbox" id="{{this}}" name="{{this}}" />
+        <label for="{{this}}">{{this}}</label>
       </li>
     </script>
   <script id="contacts_template" type="text/x-handlebars-template">
