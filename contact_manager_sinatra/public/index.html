@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>My Contact Manager</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script type="text/javascript" src="/javascripts/jquery.js"></script>
     <script type="text/javascript" src="/javascripts/handlebars.js"></script>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <form id="create_contact" method="post" action="">
+      <form id="create_contact" method="post" action="/api/contacts">
         <h1>Create Contact</h1>
         <fieldset>
           <dl>
@@ -55,10 +55,10 @@
           </dl>
           <dl>
             <dt>
-              <label for="phone">Telephone number:</label>
+              <label for="phone_number">Telephone number:</label>
             </dt>
             <dd>
-              <input type="text" id="phone" name="phone" />
+              <input type="text" id="phone_number" name="phone_number" />
             </dd>
           </dl>
           <dl>
@@ -78,38 +78,70 @@
       <p>Developed by <a href="#">Fernanda Franco</a>.</p>
       <!-- <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate</a>.</p> -->
     </footer>
-
-    <script id="tags_template" type="text/x-handlebars-template">
-      <ul id="taglist">
-        {{#each tags}}
-          {{> tag}}
-        {{/each}}
-      </ul>
+    <script id="update_form_template" type="text/x-handlebars-template">
+      <form id="update_contact" method="put" action="/api/contacts/{{id}}">
+        <h1>Update Contact</h1>
+        <fieldset>
+          <dl>
+            <dt>
+              <label for="full_name">Full name:</label>
+            </dt>
+            <dd>
+              <input type="text" id="full_name" name="full_name" value={{full_name}} />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="email">Email address:</label>
+            </dt>
+            <dd>
+              <input type="email" id="email" name="email" value={{email}} />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="phone_number">Telephone number:</label>
+            </dt>
+            <dd>
+              <input type="text" id="phone_number" name="phone_number" value={{phone_number}} />
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="tags">Tags:</label>
+            </dt>
+            <dd>
+              <input type="text" id="tags" name="tags" value={{tags}} />
+            </dd>
+          </dl>
+          <input class="button" type="submit" value="Submit" />
+          <a id="cancel" class="button" href="#">Cancel</a>
+        </fieldset>
+      </form>
     </script>
-    <script id="tag_template" type="text/x-handlebars-template">
-      <li id="tagitem">
-        <input type="checkbox" id="{{this}}" name="{{this}}" />
-        <label for="{{this}}">{{this}}</label>
-      </li>
-    </script>
-  <script id="contacts_template" type="text/x-handlebars-template">
+    <script id="contacts_template" type="text/x-handlebars-template">
       {{#each contacts}}
         {{> contact}}
       {{/each}}
     </script>
     <script id="contact_template" type="text/x-handlebars-template">
-      <div class="contact">
+      <div data-id="{{id}}" class="contact">
           <h1>{{full_name}}</h1>
           <dl>
             <dt>Phone Number:</dt>
             <dd>{{phone_number}}</dd>
+          </dl>
+          <dl>
             <dt>Email:</dt>
             <dd>{{email}}</dd>
+          </dl>
+          <dl>
             <dt>Tags:</dt>
             <dd>
-              {{#each tags}}
+              {{tags}}
+              <!-- {{#each tags}}
                 <a href="" data-tag="{{this}}">{{this}}</a>
-              {{/each}}
+              {{/each}} -->
             </dd>
           </dl>
           <a class="edit" href="/api/contacts/{{id}}">Edit</a>

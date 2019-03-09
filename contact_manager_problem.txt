@@ -1,0 +1,17 @@
+front page
+makes request to contacts api
+if has any contacts, show contacts
+if none, show no contacts
+clicking on edit a contact launches edit form
+  populated with that contacts info already
+  sends update request to api
+  api responds with updated contact json
+  redraw contact on the front page
+clicking on delete a contact send delete request to api
+  removes contact from front page
+
+
+last things to do:
+animation
+search bar
+css
