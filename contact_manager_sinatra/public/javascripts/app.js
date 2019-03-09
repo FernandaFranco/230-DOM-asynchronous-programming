@@ -6,7 +6,6 @@ const App = {
     this.updateFormTemplate = Handlebars.compile($('#update_form_template').html());
     Handlebars.registerPartial('contact', $('#contact_template').html());
     this.contactsTemplate = Handlebars.compile($('#contacts_template').html());
-    // this.contact = template({ contacts: this.contacts });
   },
   areValidInputs() {
     return true;
@@ -42,7 +41,7 @@ const App = {
 
     xhr.addEventListener('load', (e) => {
       if (xhr.status === 201) {
-        this.retrieveStoredContacts();
+        this.renderHomePage();
         this.handleCancelling(e);
       }
     });
@@ -76,7 +75,7 @@ const App = {
 
     xhr.addEventListener('load', (e) => {
       if (xhr.status === 201) {
-        this.retrieveStoredContacts();
+        this.renderHomePage();
         this.handleCancelling(e);
       }
     });
@@ -86,11 +85,12 @@ const App = {
   handleEditForm(e) {
     e.preventDefault();
     const url = $(e.currentTarget).attr('href');
+    url = url.split('/');
+    const id = url[url.length - 1];
 
-
-    $('main').append(this.updateFormTemplate());
+    $('main').append(this.updateFormTemplate(this.contacts[id]));
     $('#home_container').slideToggle(this.ANIMATION_DELAY);
-    $('#update_contact').slideToggle(this.ANIMATION_DELAY);
+    // $('#update_contact').slideToggle(this.ANIMATION_DELAY);
     $('#home_container').after($('#update_contact'));
   },
   deleteContact(url) {
@@ -99,7 +99,10 @@ const App = {
 
     xhr.addEventListener('load', (e) => {
       if (xhr.status === 204) {
-        this.retrieveStoredContacts();
+        url = url.split('/');
+        const id = url[url.length -1];
+        this.contacts = this.contacts.filter((contact) => { contact.id !== id });
+        this.renderHomePage();
       }
     });
 
@@ -115,7 +118,7 @@ const App = {
   },
   bindEvents() {
     $('.add_contact').on('click', this.handleAddForm.bind(this));
-    $('#cancel').on('click', this.handleCancelling.bind(this));
+    $('main').on('click', '.cancel', this.handleCancelling.bind(this));
     $('#create_contact').on('submit', this.handleCreatingContact.bind(this));
     $('#contacts_container').on('click', '.edit', this.handleEditForm.bind(this));
     $('#update_contact').on('submit', this.handleUpdatingContact.bind(this));
@@ -128,16 +131,22 @@ const App = {
 
     xhr.addEventListener('load', (e) => {
       if (xhr.status === 200 && xhr.response.length > 0) {
-        $('#contacts_container').html(this.contactsTemplate({ contacts: xhr.response }));
-      } else {
-        $('#no_contacts').show();
+        this.contacts = xhr.response;
       }
     });
 
     xhr.send();
   },
+  renderHomePage() {
+    if (this.contacts.length > 0) {
+      $('#contacts_container').html(this.contactsTemplate({ contacts: this.contacts }));
+    } else {
+      $('#no_contacts').show();
+    }
+  },
   init() {
     this.retrieveStoredContacts();
+    this.renderHomePage();
     this.bindEvents();
     this.compileTemplates();
   },
