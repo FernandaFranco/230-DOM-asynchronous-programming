@@ -42,8 +42,6 @@ header h2 {
   font-size: 18px;
   color: #563d7d;
   text-decoration: none;
-  display: inline-block;
-
 }
 
 .button:hover {
@@ -83,7 +81,7 @@ input {
 
 }
 
-#create_contact {
+form {
   display: none;
   padding: 30px 20px;
   box-sizing: border-box;
@@ -91,45 +89,102 @@ input {
   background-color: #ffffff;
 }
 
-#create_contact h1 {
+form h1 {
   font-size: 28px;
   font-weight: 500;
   padding-bottom: 10px;
   border-bottom: 1px solid #e3e3e3;
 }
 
-#create_contact dl {
+form dl {
   margin: 20px 0;
 }
 
-#create_contact dt,
-#create_contact dd {
+form dt,
+form dd {
   display: inline-block;
 }
 
-#create_contact dt {
+form dt {
   width: 150px;
   text-align: right;
 }
 
-#create_contact dd {
+form dd {
   width: 60%;
 }
 
-#create_contact label {
+form label {
   font-size: 14px;
   font-weight: 600;
 }
 
-#create_contact input[type="text"],
-#create_contact input[type="email"] {
+form input[type="text"],
+form input[type="email"] {
   width: 100%;
+}
+
+#contacts_container {
+  margin: 40px 50px;
+}
+
+.contact {
+  display: inline-block;
+  width: 255px;
+  margin-left: 3%;
+  vertical-align: top;
+  font-size: 14px;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 40px;
+}
+
+
+.contact h1 {
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 30px;
+}
+
+.contact dt {
+  font-weight: 600;
+}
+
+.tag {
+  text-decoration: none;
+  color: #2a6496;
+}
+
+.tag:hover {
+  text-decoration: underline;
+}
+
+.edit {
+  margin-top: 20px;
+  margin-left: 0;
 }
 
 footer {
   border-top: 1px solid #dddddd;
   margin: 50px 20px;
   padding: 20px;
+}
+
+#filter_message {
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin:10px;
+  text-align: center;
+  background-color: #e3e3e3;
+}
+
+#filter_message a {
+  text-decoration: none;
+  color: #2a6496;
+}
+
+#filter_message a:hover {
+  text-decoration: underline;
 }
 
 footer p {

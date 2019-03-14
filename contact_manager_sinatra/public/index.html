@@ -15,79 +15,42 @@
     <header>
       <h1>Contact Manager</h1>
       <h2>Using jQuery, Handlebars and ES6</h2>
-      <!-- <h2>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</h2> -->
     </header>
     <main>
       <div id="home_container">
         <div id="search_container">
-          <form>
-            <fieldset>
-              <a class="add_contact button" href="#">Add Contact</a>
-              <input id="search_bar" type="text" name="search_bar" placeholder="Search" />
-            </fieldset>
-          </form>
+          <a class="add_contact button" href="#">Add Contact</a>
+          <input id="search_bar" type="text" name="search_bar" placeholder="Search" />
         </div>
         <div id="contacts_container">
-          <div id="no_contacts">
-            <h1>There is no contacts.</h1>
-            <a class="add_contact button" href="#">Add Contact</a>
-          </div>
+        </div>
+        <div id="no_contacts">
+          <h1>There is no contacts.</h1>
+          <a class="add_contact button" href="#">Add Contact</a>
         </div>
       </div>
-      <form id="create_contact" method="post" action="/api/contacts">
-        <h1>Create Contact</h1>
-        <fieldset>
-          <dl>
-            <dt>
-              <label for="full_name">Full name:</label>
-            </dt>
-            <dd>
-              <input type="text" id="full_name" name="full_name" />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <label for="email">Email address:</label>
-            </dt>
-            <dd>
-              <input type="email" id="email" name="email" />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <label for="phone_number">Telephone number:</label>
-            </dt>
-            <dd>
-              <input type="text" id="phone_number" name="phone_number" />
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <label for="tags">Tags:</label>
-            </dt>
-            <dd>
-              <input type="text" id="tags" name="tags" />
-            </dd>
-          </dl>
-          <input class="button" type="submit" value="Submit" />
-          <a class="cancel button" href="#">Cancel</a>
-        </fieldset>
-      </form>
     </main>
     <footer>
       <p>Developed by <a href="#">Fernanda Franco</a>.</p>
-      <!-- <p>Developed by <a href="#">Devsaran.com</a> and <a href="#">239 Listing Real Estate</a>.</p> -->
     </footer>
-    <script id="update_form_template" type="text/x-handlebars-template">
-      <form id="update_contact" method="put" action="/api/contacts/{{id}}">
-        <h1>Update Contact</h1>
+    <script id="filter_message_template" type="text/x-handlebars-template">
+      <div id="filter_message">
+          <p>
+            Showing only contacts tagged as "{{tag}}".
+            <a id="unfilter" href="#">Remove filter</a>
+          </p>
+        </div>
+    </script>
+    <script id="form_template" type="text/x-handlebars-template">
+      <form data-id="{{id}}" id="{{purpose}}_contact" method="" action="">
+        <h1>{{purpose}} Contact</h1>
         <fieldset>
           <dl>
             <dt>
               <label for="full_name">Full name:</label>
             </dt>
             <dd>
-              <input type="text" id="full_name" name="full_name" value={{full_name}} />
+              <input type="text" id="full_name" name="full_name" value="{{full_name}}" />
             </dd>
           </dl>
           <dl>
@@ -95,7 +58,7 @@
               <label for="email">Email address:</label>
             </dt>
             <dd>
-              <input type="email" id="email" name="email" value={{email}} />
+              <input type="email" id="email" name="email" value="{{email}}" />
             </dd>
           </dl>
           <dl>
@@ -103,7 +66,7 @@
               <label for="phone_number">Telephone number:</label>
             </dt>
             <dd>
-              <input type="text" id="phone_number" name="phone_number" value={{phone_number}} />
+              <input type="text" id="phone_number" name="phone_number" value="{{phone_number}}" />
             </dd>
           </dl>
           <dl>
@@ -111,7 +74,7 @@
               <label for="tags">Tags:</label>
             </dt>
             <dd>
-              <input type="text" id="tags" name="tags" value={{tags}} />
+              <input type="text" id="tags" name="tags" value="{{tags}}" />
             </dd>
           </dl>
           <input class="button" type="submit" value="Submit" />
@@ -138,14 +101,13 @@
           <dl>
             <dt>Tags:</dt>
             <dd>
-              {{tags}}
-              <!-- {{#each tags}}
-                <a href="" data-tag="{{this}}">{{this}}</a>
-              {{/each}} -->
+              {{#each tags}}
+                <a class="tag" href="#" data-tag="{{this}}">{{this}}</a>
+              {{/each}}
             </dd>
           </dl>
-          <a class="edit" href="/api/contacts/{{id}}">Edit</a>
-          <a class="delete" href="/api/contacts/{{id}}">Delete</a>
+          <a class="edit button" href="/api/contacts/{{id}}">Edit</a>
+          <a class="delete button" href="/api/contacts/{{id}}">Delete</a>
         </div>
     </script>
   </body>
