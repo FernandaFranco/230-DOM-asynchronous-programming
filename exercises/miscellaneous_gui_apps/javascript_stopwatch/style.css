@@ -1,0 +1,31 @@
+body {
+  background-color: #A19122;
+  font-family: monospace;
+}
+
+div {
+  text-align: center;
+}
+
+p {
+  display: inline-block;
+  color: #fff;
+  font-size: 86px;
+}
+
+a {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: inline-block;
+  width: 80px;
+  box-sizing: border-box;
+  margin-left: 20px;
+}
+
+a:hover {
+  background-color: #b6af80;
+}
