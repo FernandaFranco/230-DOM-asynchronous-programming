@@ -1,17 +1,21 @@
 front page
 makes request to contacts api
+stores contacts in the app
 if has any contacts, show contacts
 if none, show no contacts
 clicking on edit a contact launches edit form
   populated with that contacts info already
   sends update request to api
   api responds with updated contact json
-  redraw contact on the front page
-clicking on delete a contact send delete request to api
-  removes contact from front page
+  update contacts object stored
+  redraw front page
+clicking on delete a contact send delete request to api]
+  removes contact object stored
+  removes front page
+tag filtering
+search bar
+animation
 
 
 last things to do:
-animation
-search bar
-css
+input validation
